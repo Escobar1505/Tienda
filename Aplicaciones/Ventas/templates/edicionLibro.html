@@ -1,0 +1,46 @@
+{% extends "./base.html" %}
+
+{% block title %} Edición de Libros {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edición de Libros de libros</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarLibro/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCodigo" name="txtCodigo" value="{{libro.condigo}}" class="form-control" placeholder="Código" 
+                        minlength="6" maxlength="6" readonly required>
+                    </div>
+                        
+                    <div class="form-group">
+                        <input type="text" id="txtNombre" name="txtNombre" value="{{libro.nombre}}" class="form-control" placeholder="Nombre" 
+                        maxlength="50" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtAutor" name="txtAutor" value="{{libro.autor}}" class="form-control" placeholder="Autor" 
+                        maxlength="50" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtEditorial" name="txtEditorial" value="{{libro.editorial}}" class="form-control" placeholder="Editorial" 
+                        maxlength="30" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="numCalificacion" name="numCalificacion"value="{{libro.calificacion}}" class="form-control" min="1" max="10" 
+                        value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                    
+                </form>
+    </div>
+</div>
+
+{% endblock %}

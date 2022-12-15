@@ -1,0 +1,76 @@
+{% extends "./base.html"%}
+
+{% block title %} Gestión de Libros {% endblock title %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Gestión de libros</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarLibro/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Código" 
+                        minlength="6" maxlength="6" required>
+                    </div>
+                        
+                    <div class="form-group">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" 
+                        maxlength="50" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtAutor" name="txtAutor" class="form-control" placeholder="Autor" 
+                        maxlength="50" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtEditorial" name="txtEditorial" class="form-control" placeholder="Editorial" 
+                        maxlength="30" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="numCalificacion" name="numCalificacion" class="form-control" min="1" max="10" 
+                        value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Libros</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Autor</th>
+                        <th>Editorial</th>
+                        <th>Calificación</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in libros %}
+                    <tr>
+                        <td>{{c.codigo}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.autor}}</td>
+                        <td>{{c.editorial}}</td>
+                        <td>{{c.calificacion}}</td>
+                        <td><a href="edicionLibro/{{c.codigo}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminacionLibro/{{c.codigo}}" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
